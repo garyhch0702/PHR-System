@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 657300
+      MYSQL_DATABASE: GARYH0702
+    ports:
+      - "3307:3306"
+  user_service:
+    build: ./src/user_service
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  health_data_service:
+    build: ./src/health_data_service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db
